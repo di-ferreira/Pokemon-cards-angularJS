@@ -1,0 +1,14 @@
+.navigation {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: flex-end;
+  column-gap: 5rem;
+  background-color: #d43b47;
+  padding: 1.5rem;
+}
+
+.logo {
+  width: auto;
+  height: 100%;
+}

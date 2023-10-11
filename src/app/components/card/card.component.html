@@ -1,0 +1,32 @@
+<article class="card" [style]="ReturnBackgroundCard(pokemon.types[0])">
+  <figure class="card-image" [style]="ReturnImagePokemon(pokemon)"></figure>
+  <h2 class="card-name">{{ pokemon.name }}</h2>
+  <span class="card-num">{{ addZero(pokemon.num, 3) }}</span>
+
+  <div class="card-types">
+    <span
+      *ngFor="let type of pokemon.types"
+      [style]="ReturnBackgroundColor(type)"
+      >{{ type }}</span
+    >
+  </div>
+
+  <div class="card-stats" [style]="ReturnBackgroundColor(pokemon.types[0])">
+    <div class="stat">
+      <div class="value">{{ pokemon.hp }}</div>
+      <div class="type">hp</div>
+    </div>
+    <div class="stat">
+      <div class="value">{{ pokemon.attack }}</div>
+      <div class="type">Attack</div>
+    </div>
+    <div class="stat">
+      <div class="value">{{ pokemon.defense }}</div>
+      <div class="type">Defense</div>
+    </div>
+    <div class="stat">
+      <div class="value">{{ pokemon.speed }}</div>
+      <div class="type">Speed</div>
+    </div>
+  </div>
+</article>
