@@ -1,18 +1,7 @@
 import { Component, Input } from '@angular/core';
-
-interface iPokemon {
-  num: number;
-  hp: number;
-  name: string;
-  attack: number;
-  defense: number;
-  speed: number;
-  types: string[];
-}
-interface iTypeColor {
-  type: string;
-  color: string;
-}
+import { iPokemon, iTypeColor } from 'src/app/model/pokemon.model';
+import { ApiService } from 'src/app/services/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -42,6 +31,12 @@ export class CardComponent {
   ];
 
   @Input() pokemon: iPokemon;
+
+  PokeInf: iPokemon;
+
+  constructor(private api: ApiService) {
+    this.GetPokemonInfo(1);
+  }
 
   ReturnImagePokemon = (pokemon: iPokemon): string => {
     return `background: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.num}.png) no-repeat center;`;
@@ -76,5 +71,9 @@ export class CardComponent {
     );
 
     return `background: radial-gradient(circle at 50% 0%, ${typeResult.color} 36%, #ffffff 36%);`;
+  };
+
+  GetPokemonInfo = (PokeNum: number): void => {
+    this.api.GetPokemon(PokeNum).subscribe((poke) => console.log(poke));
   };
 }
