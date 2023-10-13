@@ -1,32 +1,43 @@
-<article class="card" [style]="ReturnBackgroundCard(PokeInf.types[0])">
-  <figure class="card-image" [style]="ReturnImagePokemon(PokeInf)"></figure>
-  <h2 class="card-name">{{ PokeInf.name }}</h2>
-  <span class="card-num">{{ addZero(PokeInf.num, 3) }}</span>
+<ng-container *ngIf="PokeInf$ | async as PokeInf">
+  <article
+    class="card"
+    [style]="ReturnBackgroundCard(PokeInf.types[0].type.name)"
+  >
+    <figure
+      class="card-image"
+      [style]="ReturnImagePokemon(PokeInf.id)"
+    ></figure>
+    <h2 class="card-name">{{ PokeInf.name }}</h2>
+    <span class="card-num">{{ addZero(PokeInf.id, 3) }}</span>
 
-  <div class="card-types">
-    <span
-      *ngFor="let type of PokeInf.types"
-      [style]="ReturnBackgroundColor(type)"
-      >{{ type }}</span
+    <div class="card-types">
+      <span
+        *ngFor="let type of PokeInf.types"
+        [style]="ReturnBackgroundColor(type.type.name)"
+        >{{ type.type.name }}</span
+      >
+    </div>
+
+    <div
+      class="card-stats"
+      [style]="ReturnBackgroundColor(PokeInf.types[0].type.name)"
     >
-  </div>
-
-  <div class="card-stats" [style]="ReturnBackgroundColor(PokeInf.types[0])">
-    <div class="stat">
-      <div class="value">{{ PokeInf.hp }}</div>
-      <div class="type">hp</div>
+      <div class="stat">
+        <div class="value">{{ PokeInf.stats[0].base_stat }}</div>
+        <div class="type">hp</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{ PokeInf.stats[1].base_stat }}</div>
+        <div class="type">Attack</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{ PokeInf.stats[2].base_stat }}</div>
+        <div class="type">Defense</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{ PokeInf.stats[5].base_stat }}</div>
+        <div class="type">Speed</div>
+      </div>
     </div>
-    <div class="stat">
-      <div class="value">{{ PokeInf.attack }}</div>
-      <div class="type">Attack</div>
-    </div>
-    <div class="stat">
-      <div class="value">{{ PokeInf.defense }}</div>
-      <div class="type">Defense</div>
-    </div>
-    <div class="stat">
-      <div class="value">{{ PokeInf.speed }}</div>
-      <div class="type">Speed</div>
-    </div>
-  </div>
-</article>
+  </article>
+</ng-container>

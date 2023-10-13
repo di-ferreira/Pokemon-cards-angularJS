@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { iApi, iPokemon } from '../model/pokemon.model';
+import { iApi, iPokemonResponse } from '../model/pokemon.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,6 @@ export class ApiService {
   }
 
   GetPokemon(pokeName: string | number) {
-    return this.httpClient.get<iPokemon>(`${this.url}/${pokeName}`);
+    return this.httpClient.get<iPokemonResponse>(`${this.url}/${pokeName}`);
   }
 }

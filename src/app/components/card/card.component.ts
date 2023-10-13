@@ -1,5 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { iPokemon, iTypeColor } from 'src/app/model/pokemon.model';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  iPokemon,
+  iPokemonResponse,
+  iTypeColor,
+} from 'src/app/model/pokemon.model';
 import { ApiService } from 'src/app/services/api.service';
 import { Observable } from 'rxjs';
 
@@ -8,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   private typeColor: iTypeColor[] = [
     { type: 'normal', color: '#A8A77A' },
     { type: 'fire', color: '#EE8130' },
@@ -30,16 +34,18 @@ export class CardComponent {
     { type: 'fairy', color: '#D685AD' },
   ];
 
-  @Input() pokemon: iPokemon;
+  @Input() pokeNum: number;
 
-  PokeInf: iPokemon;
+  PokeInf$: Observable<iPokemonResponse>;
 
-  constructor(private api: ApiService) {
-    this.GetPokemonInfo(1);
+  constructor(private api: ApiService) {}
+
+  ngOnInit(): void {
+    this.GetPokemonInfo(this.pokeNum);
   }
 
-  ReturnImagePokemon = (pokemon: iPokemon): string => {
-    return `background: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.num}.png) no-repeat center;`;
+  ReturnImagePokemon = (pokemonID: number): string => {
+    return `background: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png) no-repeat center;`;
   };
 
   addZero = (n: number, totalZeros: number) => {
@@ -74,6 +80,6 @@ export class CardComponent {
   };
 
   GetPokemonInfo = (PokeNum: number): void => {
-    this.api.GetPokemon(PokeNum).subscribe((poke) => console.log(poke));
+    this.PokeInf$ = this.api.GetPokemon(PokeNum);
   };
 }

@@ -8,14 +8,18 @@ import { iPokemon } from 'src/app/model/pokemon.model';
 })
 export class ContainerCardsComponent {
   pokemons: iPokemon[];
+  Pokenum: number[];
 
   constructor() {
-    this.pokemons = this.getPokemons(5);
+    this.getPokemons();
   }
 
   getPokemons(qtdPokemons: number = 151): iPokemon[] {
     let ListPokemons: iPokemon[] = [];
+    let ListPokenums: number[] = [];
+
     for (let i = 1; i < qtdPokemons + 1; i++) {
+      ListPokenums.push(i);
       let pokemon: iPokemon = {
         num: i,
         hp: 0,
@@ -28,7 +32,8 @@ export class ContainerCardsComponent {
 
       ListPokemons.push(pokemon);
     }
-
+    this.Pokenum = ListPokenums;
+    this.pokemons = ListPokemons;
     return ListPokemons;
   }
 }
