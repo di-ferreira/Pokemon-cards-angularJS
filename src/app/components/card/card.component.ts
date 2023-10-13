@@ -34,7 +34,7 @@ export class CardComponent implements OnInit {
     { type: 'fairy', color: '#D685AD' },
   ];
 
-  @Input() pokeNum: number;
+  @Input() pokeNum: number | string;
 
   PokeInf$: Observable<iPokemonResponse>;
 
@@ -79,7 +79,7 @@ export class CardComponent implements OnInit {
     return `background: radial-gradient(circle at 50% 0%, ${typeResult.color} 36%, #ffffff 36%);`;
   };
 
-  GetPokemonInfo = (PokeNum: number): void => {
+  GetPokemonInfo = (PokeNum: number | string): void => {
     this.PokeInf$ = this.api.GetPokemon(PokeNum);
   };
 }

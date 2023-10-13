@@ -1,9 +1,27 @@
 <div class="search">
   <input
+    [(ngModel)]="FindInput"
     type="text"
     placeholder="Buscar por NOME ou ID"
     class="Input"
     id="Input"
   />
-  <button type="button" title="Seach Pokemon" class="Button" id="btn">BUSCAR</button>
+  <button
+    type="button"
+    title="Seach Pokemon"
+    class="Button"
+    id="btn"
+    (click)="FindPokemon(FindInput)"
+  >
+    BUSCAR
+  </button>
+  <button
+    type="button"
+    title="Seach Pokemon"
+    class="Button"
+    id="btnAll"
+    (click)="FindAllPokemon()"
+  >
+    Listar Todos
+  </button>
 </div>
