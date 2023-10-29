@@ -1,43 +1,49 @@
 <ng-container *ngIf="PokeInf$ | async as PokeInf">
-  <article
-    class="card"
-    [style]="ReturnBackgroundCard(PokeInf.types[0].type.name)"
+  <a
+    class="card_link"
+    [routerLink]="['/pokemon', PokeInf.name]"
+    routerLinkActive="router-link-active"
   >
-    <figure
-      class="card-image"
-      [style]="ReturnImagePokemon(PokeInf.id)"
-    ></figure>
-    <h2 class="card-name">{{ PokeInf.name }}</h2>
-    <span class="card-num">{{ addZero(PokeInf.id, 3) }}</span>
-
-    <div class="card-types">
-      <span
-        *ngFor="let type of PokeInf.types"
-        [style]="ReturnBackgroundColor(type.type.name)"
-        >{{ type.type.name }}</span
-      >
-    </div>
-
-    <div
-      class="card-stats"
-      [style]="ReturnBackgroundColor(PokeInf.types[0].type.name)"
+    <article
+      class="card"
+      [style]="ReturnBackgroundCard(PokeInf.types[0].type.name)"
     >
-      <div class="stat">
-        <div class="value">{{ PokeInf.stats[0].base_stat }}</div>
-        <div class="type">hp</div>
+      <figure
+        class="card-image"
+        [style]="ReturnImagePokemon(PokeInf.id)"
+      ></figure>
+      <h2 class="card-name">{{ PokeInf.name }}</h2>
+      <span class="card-num">{{ addZero(PokeInf.id, 3) }}</span>
+
+      <div class="card-types">
+        <span
+          *ngFor="let type of PokeInf.types"
+          [style]="ReturnBackgroundColor(type.type.name)"
+          >{{ type.type.name }}</span
+        >
       </div>
-      <div class="stat">
-        <div class="value">{{ PokeInf.stats[1].base_stat }}</div>
-        <div class="type">Attack</div>
+
+      <div
+        class="card-stats"
+        [style]="ReturnBackgroundColor(PokeInf.types[0].type.name)"
+      >
+        <div class="stat">
+          <div class="value">{{ PokeInf.stats[0].base_stat }}</div>
+          <div class="type">hp</div>
+        </div>
+        <div class="stat">
+          <div class="value">{{ PokeInf.stats[1].base_stat }}</div>
+          <div class="type">Attack</div>
+        </div>
+        <div class="stat">
+          <div class="value">{{ PokeInf.stats[2].base_stat }}</div>
+          <div class="type">Defense</div>
+        </div>
+        <div class="stat">
+          <div class="value">{{ PokeInf.stats[5].base_stat }}</div>
+          <div class="type">Speed</div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="value">{{ PokeInf.stats[2].base_stat }}</div>
-        <div class="type">Defense</div>
-      </div>
-      <div class="stat">
-        <div class="value">{{ PokeInf.stats[5].base_stat }}</div>
-        <div class="type">Speed</div>
-      </div>
-    </div>
-  </article>
+    </article>
+  </a>
 </ng-container>

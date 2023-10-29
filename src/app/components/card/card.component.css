@@ -1,3 +1,7 @@
+.card_link{
+  text-decoration: none;
+}
+
 .card {
   position: relative;
   display: grid;
