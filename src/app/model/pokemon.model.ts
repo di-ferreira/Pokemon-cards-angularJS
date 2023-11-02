@@ -1,18 +1,48 @@
-export interface iPokemon {
-  num: number;
-  hp: number;
+export interface iPokemonResponse {
+  id: number;
   name: string;
-  attack: number;
-  defense: number;
-  speed: number;
-  types: string[];
+  height: number;
+  weight: number;
+  base_experience: number;
+  species: iSpecies;
+  stats: iStats[];
+  types: iTypes[];
+  moves: iMoves[];
 }
 
-export interface iApi {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: iPokemon[];
+export interface iStats {
+  base_stat: number;
+  effort: number;
+  stat: iStat;
+}
+
+export interface iStat {
+  name: string;
+  url: string;
+}
+
+export interface iTypes {
+  slot: number;
+  type: iType;
+}
+
+export interface iType {
+  name: string;
+  url: string;
+}
+
+export interface iSpecies {
+  name: string;
+  url: string;
+}
+
+export interface iMoves {
+  move: iMove;
+}
+
+export interface iMove {
+  name: string;
+  url: string;
 }
 
 export interface iTypeColor {
@@ -20,30 +50,50 @@ export interface iTypeColor {
   color: string;
 }
 
-export interface iPokemonResponse {
+export interface iSpeciesResponse {
+  evolution_chain: iEvolutionChain;
+  evolves_from_species: iEvolvesFromSpecies;
+  shape: iShape;
+  varieties: iVariety[];
+}
+
+export interface iEvolutionChain {
+  url: string;
+}
+
+export interface iEvolvesFromSpecies {
+  name: string;
+  url: string;
+}
+
+export interface iShape {
+  name: string;
+  url: string;
+}
+
+export interface iVariety {
+  is_default: boolean;
+  pokemon: iPokemonVariety;
+}
+
+export interface iPokemonVariety {
+  name: string;
+  url: string;
+}
+
+export interface iEvolutionResponse {
+  chain: iChainEvolution;
   id: number;
-  name: string;
-  stats: Stat[];
-  types: Type[];
 }
 
-export interface Stat {
-  base_stat: number;
-  effort: number;
-  stat: Stat2;
+export interface iChainEvolution {
+  evolves_to: iEvolvesTo[];
+  is_baby: boolean;
+  species: iSpecies;
 }
 
-export interface Stat2 {
-  name: string;
-  url: string;
-}
-
-export interface Type {
-  slot: number;
-  type: Type2;
-}
-
-export interface Type2 {
-  name: string;
-  url: string;
+export interface iEvolvesTo {
+  evolves_to: iEvolvesTo[];
+  is_baby: boolean;
+  species: iSpecies;
 }

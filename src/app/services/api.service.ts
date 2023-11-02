@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { iApi, iPokemonResponse } from '../model/pokemon.model';
+import { iPokemonResponse } from '../model/pokemon.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,14 @@ export class ApiService {
   private PokeList = signal<(number | string)[]>([]);
   constructor(private httpClient: HttpClient) {}
 
-  ListPokemons() {
-    return this.httpClient.get<iApi>(`${this.url}?limit=150`);
+  GetPokemon(pokeName: string | number) {
+    return this.httpClient.get<iPokemonResponse>(
+      `${this.url}/pokemon/${pokeName}`
+    );
   }
 
-  GetPokemon(pokeName: string | number) {
-    return this.httpClient.get<iPokemonResponse>(`${this.url}/${pokeName}`);
+  GetPokemonUtilities<T>(url: string): Observable<T> {
+    return this.httpClient.get<T>(url);
   }
 
   public UpdateListPokemons(List: string | number = 151) {
