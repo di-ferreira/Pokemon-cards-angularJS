@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { iPokemonResponse } from '../model/pokemon.model';
+import { iPokemonResponse, iSpeciesResponse } from '../model/pokemon.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,43 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private url = environment.api;
   private PokeList = signal<(number | string)[]>([]);
+  private CurrentPokemon = signal<iPokemonResponse>({
+    id: 0,
+    name: '',
+    height: 0,
+    weight: 0,
+    base_experience: 0,
+    species: {
+      base_happiness: 0,
+      capture_rate: 0,
+      evolution_chain: {
+        url: '',
+      },
+      evolves_from_species: {
+        name: '',
+        url: '',
+      },
+      flavor_text_entries: [],
+      form_descriptions: [],
+      forms_switchable: false,
+      gender_rate: 0,
+      has_gender_differences: false,
+      hatch_counter: 0,
+      id: 0,
+      is_baby: false,
+      is_legendary: false,
+      is_mythical: false,
+      name: '',
+      order: 0,
+      shape: {
+        name: '',
+        url: '',
+      },
+    },
+    stats: [],
+    types: [],
+    moves: [],
+  });
   constructor(private httpClient: HttpClient) {}
 
   GetPokemon(pokeName: string | number) {
@@ -37,5 +74,13 @@ export class ApiService {
 
   public GetListPokemons(): (number | string)[] {
     return this.PokeList();
+  }
+
+  public GetCurrentPokemon(): iPokemonResponse {
+    return this.CurrentPokemon();
+  }
+
+  public SetCurrentPokemon(pokemon: iPokemonResponse) {
+    this.CurrentPokemon.set(pokemon);
   }
 }

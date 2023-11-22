@@ -1,1 +1,10 @@
-<h1>{{ pokemon }}</h1>
+<ng-container *ngIf="PokeInf$ | async as PokeInf">
+  <section>
+    <article>
+      <h1>{{ PokeInf.name }} Nº {{ PokeInf.id }}</h1>
+      <p *ngIf="PokeSpecies$ | async as PokeSpecies">
+        {{ PokeSpecies.flavor_text_entries[0].flavor_text }}
+      </p>
+    </article>
+  </section>
+</ng-container>

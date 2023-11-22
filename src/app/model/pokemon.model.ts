@@ -4,7 +4,7 @@ export interface iPokemonResponse {
   height: number;
   weight: number;
   base_experience: number;
-  species: iSpecies;
+  species: iSpeciesResponse;
   stats: iStats[];
   types: iTypes[];
   moves: iMoves[];
@@ -36,6 +36,51 @@ export interface iSpecies {
   url: string;
 }
 
+export interface iSpeciesResponse {
+  base_happiness: number;
+  capture_rate: number;
+  evolution_chain: EvolutionChain;
+  evolves_from_species: iEvolvesFromSpecies;
+  flavor_text_entries: FlavorTextEntry[];
+  form_descriptions: any[];
+  forms_switchable: boolean;
+  gender_rate: number;
+  has_gender_differences: boolean;
+  hatch_counter: number;
+  id: number;
+  is_baby: boolean;
+  is_legendary: boolean;
+  is_mythical: boolean;
+  name: string;
+  order: number;
+  shape: Shape;
+}
+
+export interface EvolutionChain {
+  url: string;
+}
+
+export interface FlavorTextEntry {
+  flavor_text: string;
+  language: Language;
+  version: Version;
+}
+
+export interface Language {
+  name: string;
+  url: string;
+}
+
+export interface Version {
+  name: string;
+  url: string;
+}
+
+export interface Shape {
+  name: string;
+  url: string;
+}
+
 export interface iMoves {
   move: iMove;
 }
@@ -48,13 +93,6 @@ export interface iMove {
 export interface iTypeColor {
   type: string;
   color: string;
-}
-
-export interface iSpeciesResponse {
-  evolution_chain: iEvolutionChain;
-  evolves_from_species: iEvolvesFromSpecies;
-  shape: iShape;
-  varieties: iVariety[];
 }
 
 export interface iEvolutionChain {
@@ -96,4 +134,29 @@ export interface iEvolvesTo {
   evolves_to: iEvolvesTo[];
   is_baby: boolean;
   species: iSpecies;
+}
+
+export interface iTypesResponse {
+  damage_relations: DamageRelations;
+}
+
+export interface DamageRelations {
+  double_damage_from: iType[];
+  double_damage_to: iType[];
+  half_damage_from: iType[];
+  half_damage_to: iType[];
+  no_damage_from: iType[];
+  no_damage_to: iType[];
+}
+
+export class PokemonModel implements iPokemonResponse {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  base_experience: number;
+  species: iSpeciesResponse;
+  stats: iStats[];
+  types: iTypes[];
+  moves: iMoves[];
 }

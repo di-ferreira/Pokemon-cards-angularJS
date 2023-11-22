@@ -33,7 +33,7 @@ import { PokemonListComponent } from './pages/pokemon-list/pokemon-list.componen
         component: PokemonListComponent,
       },
       {
-        path: 'pokemon/:pokemon',
+        path: 'pokemon/:pokemonId',
         component: PokemonPageComponent,
       },
     ]),

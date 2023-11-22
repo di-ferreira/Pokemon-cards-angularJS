@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  iPokemonResponse,
-  iTypeColor,
-} from 'src/app/model/pokemon.model';
+import { iPokemonResponse, iTypeColor } from 'src/app/model/pokemon.model';
 import { ApiService } from 'src/app/services/api.service';
 import { Observable } from 'rxjs';
 
