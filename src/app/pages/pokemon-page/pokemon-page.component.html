@@ -1,10 +1,40 @@
 <ng-container *ngIf="PokeInf$ | async as PokeInf">
-  <section>
-    <article>
-      <h1>{{ PokeInf.name }} Nº {{ PokeInf.id }}</h1>
-      <p *ngIf="PokeSpecies$ | async as PokeSpecies">
-        {{ PokeSpecies.flavor_text_entries[0].flavor_text }}
-      </p>
-    </article>
-  </section>
+  <main class="container" *ngIf="PokeSpecies$ | async as PokeSpecies">
+    <section
+      class="container-card"
+      [style]="ReturnBackgroundColor(PokeInf.types[0].type.name)"
+    >
+      <span class="container-card-background"></span>
+
+      <article class="info">
+        <h1>Nº {{ addZero(PokeInf.id, 3) }} {{ PokeInf.name }}</h1>
+        <div class="card-types">
+          <span
+            *ngFor="let type of PokeInf.types"
+            [style]="ReturnBackgroundColor(type.type.name)"
+          >
+            <img
+              src="../../../assets/icons/{{ type.type.name }}.svg"
+              alt="icon {{ type.type.name }}"
+            />
+            {{ type.type.name }}
+          </span>
+        </div>
+        <p>
+          {{ PokeSpecies.flavor_text_entries[0].flavor_text }}
+        </p>
+      </article>
+
+      <article class="envol">
+        <h1>{{ PokeInf.name }} Nº {{ PokeInf.id }}</h1>
+        <p>
+          {{ PokeSpecies.flavor_text_entries[0].flavor_text }}
+        </p>
+      </article>
+
+      <article class="image">
+        <figure [style]="ReturnImagePokemon(PokeInf.id)"></figure>
+      </article>
+    </section>
+  </main>
 </ng-container>

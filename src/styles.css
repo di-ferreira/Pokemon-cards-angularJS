@@ -69,3 +69,32 @@ table {
 ::-webkit-scrollbar-thumb:hover {
   background: #b1b1b1;
 }
+
+
+.card-types {
+  grid-area: types;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-types span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3%;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px #262626;
+  -o-border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  border-radius: 1rem;
+}
+
+.card-types span img {
+  width: 20px;
+  height: auto;
+  margin-right: 5px;
+}

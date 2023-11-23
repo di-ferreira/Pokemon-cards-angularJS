@@ -19,8 +19,13 @@
         <span
           *ngFor="let type of PokeInf.types"
           [style]="ReturnBackgroundColor(type.type.name)"
-          >{{ type.type.name }}</span
         >
+          <img
+            src="../../../assets/icons/{{ type.type.name }}.svg"
+            alt="icon {{ type.type.name }}"
+          />
+          {{ type.type.name }}
+        </span>
       </div>
 
       <div
