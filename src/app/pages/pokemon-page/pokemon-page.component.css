@@ -7,32 +7,123 @@
   height: 90vh;
   overflow: hidden;
   background-color: #ddd;
-}
-
-.container-card-background{
-  position: absolute;
-  width: 80%;
-  height: 100%;
-  background-color: #eee;
-  top: 0px;
-  left: 0px;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  font-family: roboto;
 }
 
 .container-card{
   position: relative;
   display: flex;
-  width: 80%;
-  height: 65%;
+  width: 60%;
+  height: 75%;
   padding: 1rem;
   background-color: #eee;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
 }
 
-.info{
+.container-card-background{
+  position: absolute;
+  width: 80%;
+  height: 99%;
+  background-color: #eee;
+  top: .25rem;
+  left: .25rem;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+
+.info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1.5rem;
+  width: 70rem;
+  padding: 1rem;
+}
+
+.info h1{
+  text-transform: capitalize;
+  font-variant: small-caps;
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin-bottom: -1.5rem;
+}
+
+.info h3{
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.info p{
+  line-height: 1.7rem;
+  text-align: start;
+}
+
+.info .card-types {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: -1.5rem;
+}
+
+.info .card-types span {
+  display: flex;
+  margin: 0rem 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.info .card-types span img {
+  width: 20px;
+  height: auto;
+  margin-right: 0px;
+}
+
+.ability {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: .5rem;
+}
+
+.ability h4{
+  text-align: center;
+  font-size: 2rem;
+}
+
+.ability > .containerAbility{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  height: auto;
+  background-color: none !important;
+}
+
+.ability > .containerAbility span{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+  background-color: #113864;
+  border-radius: .5rem;
+  color: #ddd;
+  height: 2.5rem;
+  box-shadow: 4px 3px 12px rgba(17, 56, 100, 0.7);
 }
 
 .image figure{

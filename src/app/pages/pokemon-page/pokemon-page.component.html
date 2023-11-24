@@ -7,7 +7,8 @@
       <span class="container-card-background"></span>
 
       <article class="info">
-        <h1>Nº {{ addZero(PokeInf.id, 3) }} {{ PokeInf.name }}</h1>
+        <h1>{{ PokeInf.name }}</h1>
+        <h3>Nº {{ addZero(PokeInf.id, 3) }}</h3>
         <div class="card-types">
           <span
             *ngFor="let type of PokeInf.types"
@@ -16,9 +17,18 @@
             <img
               src="../../../assets/icons/{{ type.type.name }}.svg"
               alt="icon {{ type.type.name }}"
+              title="{{ type.type.name }}"
+              [style]=""
             />
-            {{ type.type.name }}
           </span>
+        </div>
+        <div class="ability">
+          <h4>ABILITIES</h4>
+          <div class="containerAbility">
+            <span *ngFor="let ability of PokeInf.abilities">
+              {{ ability.ability.name }}
+            </span>
+          </div>
         </div>
         <p>
           {{ PokeSpecies.flavor_text_entries[0].flavor_text }}

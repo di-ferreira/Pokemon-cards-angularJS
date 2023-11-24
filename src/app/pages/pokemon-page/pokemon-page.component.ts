@@ -94,4 +94,26 @@ export class PokemonPageComponent implements OnInit {
       console.log('pokemon-species:', value);
     });
   };
+
+  hex2rgb = (hex: string): { r: number; g: number; b: number } | null => {
+    const hexRegex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
+    const result = hexRegex.exec(hex);
+    if (!result) {
+      return null;
+    }
+
+    const r = parseInt(result[1], 16);
+    const g = parseInt(result[2], 16);
+    const b = parseInt(result[3], 16);
+
+    return { r, g, b };
+  };
+
+  ReturnShadowColor = (colorHex: string): string => {
+    let colorRGB: { r: number; g: number; b: number } | null =
+      this.hex2rgb(colorHex);
+    if (colorRGB) {
+      return `box-shadow: 4px 3px 12px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0.7);`;
+    } else return '';
+  };
 }

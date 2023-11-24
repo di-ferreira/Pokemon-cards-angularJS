@@ -8,6 +8,12 @@ export interface iPokemonResponse {
   stats: iStats[];
   types: iTypes[];
   moves: iMoves[];
+  abilities: iAbility[];
+}
+
+export interface iAbility {
+  ability: { name: string; url: string };
+  is_hidden: boolean;
 }
 
 export interface iStats {
@@ -150,6 +156,7 @@ export interface DamageRelations {
 }
 
 export class PokemonModel implements iPokemonResponse {
+  abilities: iAbility[];
   id: number;
   name: string;
   height: number;

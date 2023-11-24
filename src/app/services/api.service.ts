@@ -46,6 +46,7 @@ export class ApiService {
     stats: [],
     types: [],
     moves: [],
+    abilities: [],
   });
   constructor(private httpClient: HttpClient) {}
 
