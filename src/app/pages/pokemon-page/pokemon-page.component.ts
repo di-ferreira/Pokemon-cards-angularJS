@@ -1,7 +1,16 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, Input, OnInit, WritableSignal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  WritableSignal,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  FlavorTextEntry,
+  iEvolutionResponse,
   iPokemonResponse,
   iSpeciesResponse,
   iTypeColor,
@@ -17,6 +26,9 @@ export class PokemonPageComponent implements OnInit {
   pokemon: string;
   PokeInf$: Observable<iPokemonResponse>;
   PokeSpecies$: Observable<iSpeciesResponse>;
+  ChainEvolution$: Observable<iEvolutionResponse>;
+  @Input() PokemonVarietyID: number;
+  @Output() ChangePokemonVarietyID = new EventEmitter<number>();
   private typeColor: iTypeColor[] = [
     { type: 'normal', color: '#A8A77A' },
     { type: 'fire', color: '#EE8130' },
@@ -43,6 +55,15 @@ export class PokemonPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
       this.GetPokemonInfo(String(param.get('pokemonId')));
+    });
+  }
+
+  GetEvolutionChain(url: string) {
+    this.ChainEvolution$ =
+      this.api.GetPokemonUtilities<iEvolutionResponse>(url);
+
+    this.ChainEvolution$.subscribe((evolution) => {
+      console.log('Evolutiom Chain', evolution);
     });
   }
 
@@ -88,10 +109,12 @@ export class PokemonPageComponent implements OnInit {
     );
     this.PokeInf$.subscribe((value) => {
       console.log('pokemon:', value);
+      this.PokemonVarietyID = value.id;
     });
 
     this.PokeSpecies$.subscribe((value) => {
       console.log('pokemon-species:', value);
+      this.GetEvolutionChain(value.evolution_chain.url);
     });
   };
 
@@ -116,4 +139,21 @@ export class PokemonPageComponent implements OnInit {
       return `box-shadow: 4px 3px 12px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0.7);`;
     } else return '';
   };
+
+  ChangePokemonVariety(url: string) {
+    const urlNumber = url.match(/\d+\/$/);
+    if (urlNumber) {
+      let numberID: number = Number(urlNumber[0].slice(0, -1));
+      this.PokemonVarietyID = numberID;
+      this.ChangePokemonVarietyID.emit(this.PokemonVarietyID);
+    } else {
+      console.log(`Não foi possível encontrar números no final do url ${url}`);
+    }
+  }
+
+  GetPokemonText(value: FlavorTextEntry[]): string {
+    let text = value.filter((text) => text.language.name === 'en')[0]
+      .flavor_text;
+    return text;
+  }
 }

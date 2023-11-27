@@ -31,7 +31,7 @@
           </div>
         </div>
         <p>
-          {{ PokeSpecies.flavor_text_entries[0].flavor_text }}
+          {{ GetPokemonText(PokeSpecies.flavor_text_entries) }}
         </p>
       </article>
 
@@ -42,8 +42,20 @@
         </p>
       </article>
 
-      <article class="image">
-        <figure [style]="ReturnImagePokemon(PokeInf.id)"></figure>
+      <article class="image-container">
+        <figure [style]="ReturnImagePokemon(PokemonVarietyID)"></figure>
+        <div class="containerButtonsVarieties">
+          <button
+            class="btnVarieties"
+            name="{{ forms.pokemon.name }}"
+            title="{{ forms.pokemon.name }}"
+            type="button"
+            (click)="ChangePokemonVariety(forms.pokemon.url)"
+            *ngFor="let forms of PokeSpecies.varieties"
+          >
+            {{ forms.pokemon.name }}
+          </button>
+        </div>
       </article>
     </section>
   </main>

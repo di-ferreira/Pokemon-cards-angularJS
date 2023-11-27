@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { iPokemonResponse, iSpeciesResponse } from '../model/pokemon.model';
+import { iPokemonResponse } from '../model/pokemon.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -42,6 +42,7 @@ export class ApiService {
         name: '',
         url: '',
       },
+      varieties: [],
     },
     stats: [],
     types: [],
@@ -56,7 +57,7 @@ export class ApiService {
     );
   }
 
-  GetPokemonUtilities<T>(url: string): Observable<T> {
+  public GetPokemonUtilities<T>(url: string): Observable<T> {
     return this.httpClient.get<T>(url);
   }
 

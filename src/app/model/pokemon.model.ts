@@ -60,6 +60,7 @@ export interface iSpeciesResponse {
   name: string;
   order: number;
   shape: Shape;
+  varieties: iVariety[];
 }
 
 export interface EvolutionChain {
