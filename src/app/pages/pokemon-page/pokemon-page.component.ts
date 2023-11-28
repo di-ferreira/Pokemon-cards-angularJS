@@ -1,12 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  WritableSignal,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   FlavorTextEntry,
@@ -141,13 +134,21 @@ export class PokemonPageComponent implements OnInit {
   };
 
   ChangePokemonVariety(url: string) {
+    let ID: string = this.GetUrltoIDPokemon(url);
+    if (ID !== '') {
+      this.PokemonVarietyID = Number(ID);
+      this.ChangePokemonVarietyID.emit(this.PokemonVarietyID);
+    }
+  }
+
+  GetUrltoIDPokemon(url: string): string {
     const urlNumber = url.match(/\d+\/$/);
     if (urlNumber) {
       let numberID: number = Number(urlNumber[0].slice(0, -1));
-      this.PokemonVarietyID = numberID;
-      this.ChangePokemonVarietyID.emit(this.PokemonVarietyID);
+      return numberID.toString();
     } else {
       console.log(`Não foi possível encontrar números no final do url ${url}`);
+      return '';
     }
   }
 

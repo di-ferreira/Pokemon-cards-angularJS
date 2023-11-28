@@ -1,4 +1,10 @@
 <ng-container *ngIf="PokeInf$ | async as PokeInf">
+  <a
+    class="goBackLink"
+    [routerLink]="['/']"
+    routerLinkActive="router-link-active"
+    >go back</a
+  >
   <main class="container" *ngIf="PokeSpecies$ | async as PokeSpecies">
     <section
       class="container-card"
@@ -35,11 +41,108 @@
         </p>
       </article>
 
-      <article class="envol">
-        <h1>{{ PokeInf.name }} Nº {{ PokeInf.id }}</h1>
-        <p>
-          {{ PokeSpecies.flavor_text_entries[0].flavor_text }}
-        </p>
+      <article class="chainEvolution">
+        <h1>Chain Evolution</h1>
+        <div
+          class="chainEvolutionImageContainer"
+          *ngIf="ChainEvolution$ | async as ChainEvolution"
+        >
+          <article
+            class="chainEvolutionImage"
+            [style.justify-content]="'center'"
+          >
+            <a
+              class="chainEvolutionImageLink"
+              [routerLink]="[
+                '/pokemon',
+                GetUrltoIDPokemon(ChainEvolution.chain.species.url)
+              ]"
+              routerLinkActive="router-link-active"
+            >
+              <img
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
+                  GetUrltoIDPokemon(ChainEvolution.chain.species.url)
+                }}.png"
+                alt="{{ ChainEvolution.chain.species.name }}"
+              />
+              <h5>{{ ChainEvolution.chain.species.name }}</h5>
+              <span
+                *ngIf="ChainEvolution.chain.evolves_to.length > 0"
+                class="arrowEvolution"
+                >&darr;</span
+              >
+            </a>
+          </article>
+
+          <article
+            class="chainEvolutionImage"
+            [style.justify-content]="
+              ChainEvolution.chain.evolves_to.length > 3
+                ? 'flex-start'
+                : 'center'
+            "
+          >
+            <a
+              *ngFor="let evolutions of ChainEvolution.chain.evolves_to"
+              class="chainEvolutionImageLink"
+              [routerLink]="[
+                '/pokemon',
+                GetUrltoIDPokemon(evolutions.species.url)
+              ]"
+              routerLinkActive="router-link-active"
+            >
+              <img
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
+                  GetUrltoIDPokemon(evolutions.species.url)
+                }}.png"
+                alt="{{ evolutions.species.name }}"
+              />
+              <h5>{{ evolutions.species.name }}</h5>
+              <span
+                *ngIf="ChainEvolution.chain.evolves_to[0].evolves_to.length > 0"
+                class="arrowEvolution"
+                >&darr;</span
+              >
+            </a>
+          </article>
+
+          <article
+            class="chainEvolutionImage"
+            [style.justify-content]="
+              ChainEvolution.chain.evolves_to[0].evolves_to.length > 3
+                ? 'flex-start'
+                : 'center'
+            "
+          >
+            <a
+              *ngFor="
+                let evolutions of ChainEvolution.chain.evolves_to[0].evolves_to
+              "
+              class="chainEvolutionImageLink"
+              [routerLink]="[
+                '/pokemon',
+                GetUrltoIDPokemon(evolutions.species.url)
+              ]"
+              routerLinkActive="router-link-active"
+            >
+              <img
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
+                  GetUrltoIDPokemon(evolutions.species.url)
+                }}.png"
+                alt="{{ evolutions.species.name }}"
+              />
+              <h5>{{ evolutions.species.name }}</h5>
+              <span
+                *ngIf="
+                  ChainEvolution.chain.evolves_to[0].evolves_to[0].evolves_to
+                    .length > 0
+                "
+                class="arrowEvolution"
+                >&darr;</span
+              >
+            </a>
+          </article>
+        </div>
       </article>
 
       <article class="image-container">
