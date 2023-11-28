@@ -2,26 +2,30 @@
   <input
     [(ngModel)]="FindInput"
     type="text"
-    placeholder="Buscar por NOME ou ID"
+    placeholder="Find by NAME or NUMBER"
     class="Input"
     id="Input"
+    (keydown.enter)="FindPokemon(FindInput)"
   />
   <button
     type="button"
     title="Seach Pokemon"
     class="Button"
     id="btn"
-    (click)="FindPokemon(FindInput)"
+    [routerLink]="['/pokemon', FindInput]"
+    routerLinkActive="router-link-active"
   >
-    BUSCAR
+    FIND
   </button>
   <button
     type="button"
     title="Seach Pokemon"
     class="Button"
     id="btnAll"
+    [routerLink]="['/']"
+    routerLinkActive="router-link-active"
     (click)="FindAllPokemon()"
   >
-    Listar Todos
+    LIST ALL
   </button>
 </div>

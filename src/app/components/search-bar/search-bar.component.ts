@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -8,10 +9,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class SearchBarComponent {
   FindInput: string = '';
-  constructor(public api: ApiService) {}
+
+  constructor(public api: ApiService, private router: Router) {}
   FindPokemon(pokemon: string) {
     if (pokemon !== '') {
       this.api.UpdateListPokemons(pokemon);
+      this.router.navigate(['/pokemon', pokemon]);
     }
   }
   FindAllPokemon() {
