@@ -1,3 +1,1 @@
-export const environment = {
-  api: '',
-};
+export const environment = { api: 'https://pokeapi.co/api/v2' };
